@@ -4,11 +4,42 @@
     <head>
         <meta charset="utf-8" />
        <script type="text/javascript" src="js/jquery-2.1.1.js"></script>
-        <script type="text/javascript" src="js/jquery.mobile-1.4.5.js"></script>       
+        <script type="text/javascript" src="js/jquery.mobile-1.4.5.js"></script>  
+        <script type="text/javascript" src="js/pluginstall.js"></script>     
         <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width, height=device-height, target-densitydpi=device-dpi" />
-        <link rel="stylesheet" type="text/css" href="css/jquery.mobile-1.4.5.css" />
-        
+        <link rel="stylesheet" type="text/css" href="css/jquery.mobile-1.4.5.css" />        
         <title>Pluginstall</title>
+
+        <script type="text/javascript">
+        $(document).ready(function(){
+        	document.addEventListener("deviceready",function(){
+
+
+        	$("#btcha").tap(function(){
+        		
+        		window.addEventListener("batterystatus", onBatteryStatus, false);
+        		//onBatteryStatus();
+        	});
+
+        	/*$("#btper").tap(function(){
+        		
+        		window.addEventListener("batterystatus",batteryChargeStatus,false);
+        	});
+			*/
+			//camera Not working
+			$("#tkpicbasebtn").tap(function(){
+				toastAlert("I am Clicked");
+				navigator.camera.getPicture(onDataCameraSuccess,onCameraFail,{quality:50,destinationType:camera.DestinationType.DATA_URL});
+			});
+
+			$("#connectchkbtn").tap(checkConnection);
+			$("#accel").tap(function(){
+				navigator.accelerometer.getCurrentAcceleration(accelerometerSuccess, accelerometerError);
+			});
+        	},false);
+        });
+
+        </script>
     </head>
     <body>
         <section id="landingpage" data-role="page">
@@ -18,7 +49,7 @@
             <article data-role="content" id="mainarea">
                 <ul data-role="listview" data-inset="true">
                     <li>
-                       <a href="#battery">Battery Status
+                       <a href="#battery"  data-transition="flip">Battery Status
                        <h6>Monitor the status of the device's battery.</h6> 
                        </a>
                     </li>
@@ -124,7 +155,89 @@
             <footer data-role="footer" data-position="fixed" data-theme="b">
                 <div data-role="navbar" id="navigation">
                     <ul>
-                        <li><a href="#landingpage" data-icon="home" data-iconpos="top">Home</a></li>
+                        <li><a href="#landingpage" data-icon="home" data-iconpos="top" id="homenav">Home</a></li>
+                        <li><a href="#" data-icon="info" data-iconpos="top">Info</a></li>
+                    </ul>
+                </div>
+            </footer>
+        </section>
+
+        <section data-role="page" id="battery" data-close-btn="none" data-dialog="true">
+        	<header data-role="header" data-theme="b" >
+        	<h1>Battery Plugin</h1>
+        	</header>
+        	<article data-role="content">
+        		<center>
+        			<!--<input type="button" id="btper" value="Battery Percentage" /> -->
+        			<input type="button" id="btcha" value="Check Your Battery" />
+        		</center>
+        	</article>
+        	<footer data-role="footer" data-position="fixed" data-theme="b">
+                <div data-role="navbar" id="navigation">
+                    <ul>
+                        <li><a href="#landingpage" data-icon="home" data-iconpos="top" id="homenav">Home</a></li>
+                        <li><a href="#" data-icon="info" data-iconpos="top">Info</a></li>
+                    </ul>
+                </div>
+            </footer>
+        </section>
+
+        <section data-role="page" id="camera" data-close-btn="none" data-dialog="true">
+        	<header data-role="header" data-theme="b">
+        		<h1>Camera Plugin</h1>
+        	</header>
+        	<article data-role="content">
+        		<center>
+        			<input type="button" id="tkpicbasebtn" value="Data URL" />
+        			<input type="button" id="tkpicfileurlbtn" value="File URL" />
+        			<img src="" id="picbox">
+        		</center>
+        	</article>
+        	<footer data-role="footer" data-position="fixed" data-theme="b">
+                <div data-role="navbar" id="navigation">
+                    <ul>
+                        <li><a href="#landingpage" data-icon="home" data-iconpos="top" id="homenav">Home</a></li>
+                        <li><a href="#" data-icon="info" data-iconpos="top">Info</a></li>
+                    </ul>
+                </div>
+            </footer>
+        </section>
+
+        <section data-role="page" id="network" data-close-btn="none" data-dialog="true">
+        	<header data-role="header" data-theme="b">
+        		<h1>Network Plugin</h1>
+        	</header>
+        	<article data-role="content">
+        		<center>
+        			<input type="button" id="connectchkbtn" value="Check Your Network Information" />
+        			<!--<input type="button" id="tkpicfileurlbtn" value="File URL" />-->
+        			
+        		</center>
+        	</article>
+        	<footer data-role="footer" data-position="fixed" data-theme="b">
+                <div data-role="navbar" id="navigation">
+                    <ul>
+                        <li><a href="#landingpage" data-icon="home" data-iconpos="top" id="homenav">Home</a></li>
+                        <li><a href="#" data-icon="info" data-iconpos="top">Info</a></li>
+                    </ul>
+                </div>
+            </footer>
+        </section>
+
+        <section data-role="page" id="accelerometer" data-close-btn="none" data-dialog="true">
+        	<header data-role="header" data-theme="b" >
+        	<h1>Battery Plugin</h1>
+        	</header>
+        	<article data-role="content">
+        		<center>
+        			<!--<input type="button" id="btper" value="Battery Percentage" /> -->
+        			<input type="button" id="accel" value="Current Acceleration" />
+        		</center>
+        	</article>
+        	<footer data-role="footer" data-position="fixed" data-theme="b">
+                <div data-role="navbar" id="navigation">
+                    <ul>
+                        <li><a href="#landingpage" data-icon="home" data-iconpos="top" id="homenav">Home</a></li>
                         <li><a href="#" data-icon="info" data-iconpos="top">Info</a></li>
                     </ul>
                 </div>
