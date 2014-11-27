@@ -18,6 +18,22 @@ function toastAlert(msg){
 	window.plugins.toast.showLongCenter(msg);
 }
 
+function deviceCheck(){
+    var cordova_version=device.cordova;
+    var device_model=device.model;
+    var platform=device.platform;
+    var uuid=device.uuid;
+    var version=device.version;
+    //toastAlert(cordova_version);
+    toastAlert(
+        "Cordova version:"+ cordova_version +'<br>'+ 
+        "Device Model:"+ device_model+'<br>'+
+        "OS Name:"+ platform+'<br>'+
+        "UUID:"+ uuid+'<br>'+
+        "OS version:"+ version
+        );
+}
+
 function checkConnection() {
     var networkState = navigator.connection.type;
 
@@ -35,7 +51,8 @@ function checkConnection() {
 }
 
 function accelerometerSuccess(acceleration) {
-    toastAlert('Acceleration X: ' + acceleration.x + '\n' +
+    toastAlert(
+          'Acceleration X: ' + acceleration.x + '\n' +
           'Acceleration Y: ' + acceleration.y + '\n' +
           'Acceleration Z: ' + acceleration.z + '\n' +
           'Timestamp: '      + acceleration.timestamp + '\n');
@@ -44,9 +61,21 @@ function accelerometerSuccess(acceleration) {
 function accelerometerError() {
     toastAlert('onError!');
 };
+
+//Used to save the Picture took in Camera in base64 format
 function onDataCameraSuccess(imageData){
-	$("#picbox").src = "data:image/jpeg;base64," + imageData;
+    var pic=document.getElementById("picbox");
+	pic.src = "data:image/jpeg;base64," + imageData;
 }
+
+//Used to save the Picture took in Camera as FileURL
+function onFileCameraSuccess(imageURI){
+    var pic=document.getElementById("picbox");
+    pic.src="";
+    toastAlert("Picture saved in " +imageURI);
+    pic.src = imageURI;
+}
+
 
 function onCameraFail(message){
 	toastAlert(message);
