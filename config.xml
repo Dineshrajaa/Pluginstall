@@ -1,11 +1,11 @@
 <?xml version='1.0' encoding='utf-8'?>
-<widget id="com.cgvak.dinesh.raja" version="0.0.1" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
-    <name>PluginsSample</name>
+<widget id="com.cgvak.dineshraja.pluginstall" version="0.0.1" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
+    <name>Pluginstall</name>
     <description>
-        A sample Apache Cordova application that responds to the deviceready event.
+        A Simple Cordova app to illustrate various plugins.
     </description>
-    <author email="dev@cordova.apache.org" href="http://cordova.io">
-        Apache Cordova Team
+    <author email="dineshrajaa.93@gmail.com" href="http://cordova.io">
+        Dinesh Raja
     </author>
     <content src="index.html" />
     <access origin="*" />
