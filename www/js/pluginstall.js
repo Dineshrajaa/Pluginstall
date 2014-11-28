@@ -1,23 +1,17 @@
-function onBatteryStatus(info) {
-    // Handle the online event
-    //console.log("Level: " + info.level + " isPlugged: " + info.isPlugged);
-    if (info.isPlugged=="true") toastAlert(" Phone is Charging and you have "+ info.level +" % charge");
-    else toastAlert(" Phone is on Battery and you have "+ info.level +" % charge");
-    
-}
 
-function batteryChargeStatus(info) {
-    // Handle the online event
-    //console.log("Level: " + info.level + " isPlugged: " + info.isPlugged);
-
-    toastAlert(" You have "+ info.level +" % charge");
-}
-
+			/**TOAST PLUGIN**/
 function toastAlert(msg){
 	//This is used for showing the alerts in Toast style in Center
 	window.plugins.toast.showLongCenter(msg);
 }
+			/**BATTERY PLUGIN**/
+function onBatteryStatus(info) {
+    
+    if (info.isPlugged=="true") toastAlert(" Phone is Charging and you have "+ info.level +" % charge");
+    else toastAlert(" Phone is on Battery and you have "+ info.level +" % charge");    
+}
 
+			/**DEVICE PLUGIN**/
 function deviceCheck(){
     var cordova_version=device.cordova;
     var device_model=device.model;
@@ -26,14 +20,15 @@ function deviceCheck(){
     var version=device.version;
     //toastAlert(cordova_version);
     toastAlert(
-        "Cordova version:"+ cordova_version +'<br>'+ 
-        "Device Model:"+ device_model+'<br>'+
-        "OS Name:"+ platform+'<br>'+
-        "UUID:"+ uuid+'<br>'+
+        "Cordova version:"+ cordova_version+"\n"+ 
+        "Device Model:"+ device_model+"\n"+
+        "OS Name:"+ platform+"\n"+
+        "UUID:"+ uuid+"\n"+
         "OS version:"+ version
         );
 }
 
+			/**INTERNET-INFORMATION PLUGIN**/
 function checkConnection() {
     var networkState = navigator.connection.type;
 
@@ -50,18 +45,29 @@ function checkConnection() {
     toastAlert('Connection type: ' + states[networkState]);
 }
 
+
+			/**ACCELEROMETER PLUGIN**/
 function accelerometerSuccess(acceleration) {
     toastAlert(
           'Acceleration X: ' + acceleration.x + '\n' +
           'Acceleration Y: ' + acceleration.y + '\n' +
           'Acceleration Z: ' + acceleration.z + '\n' +
           'Timestamp: '      + acceleration.timestamp + '\n');
-};
+}
+//Not Working
+function watchAccelerometer(acceleration){
+var acceleratoReading=document.getElementById(accelreading);
+      acceleratoReading.innerHTML= 'Acceleration X: ' + acceleration.x + '\n' +
+          'Acceleration Y: ' + acceleration.y + '\n' +
+          'Acceleration Z: ' + acceleration.z + '\n' +
+          'Timestamp: '      + acceleration.timestamp + '\n';
+}
 
 function accelerometerError() {
     toastAlert('onError!');
 };
 
+			/**CAMERA PLUGIN**/
 //Used to save the Picture took in Camera in base64 format
 function onDataCameraSuccess(imageData){
     var pic=document.getElementById("picbox");
@@ -80,3 +86,16 @@ function onFileCameraSuccess(imageURI){
 function onCameraFail(message){
 	toastAlert(message);
 }
+//Used to inform the viewer about the currently working Plugins
+/*function featuresAvailable(){
+alert("This is the list of working Plugins:
+		Battery Status
+		Camera
+		Device
+		Accelerometer
+		Network Information
+		Vibration
+		"
+	);
+}
+*/

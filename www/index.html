@@ -13,17 +13,13 @@
         <script type="text/javascript">
         $(document).ready(function(){
         	document.addEventListener("deviceready",function(){
-
+        					/**BATTERY PLUGIN**/
             //Used for checking the battery status
         	$("#btcha").tap(function(){        		
         		window.addEventListener("batterystatus", onBatteryStatus, false);
         		        	});
 
-        	/*$("#btper").tap(function(){
-        		
-        		window.addEventListener("batterystatus",batteryChargeStatus,false);
-        	});
-			*/
+        					/**CAMERA PLUGIN**/
 			//Used for taking Picture and returning the picture in Base64 format
 			$("#tkpicbasebtn").tap(function(){				
         navigator.camera.getPicture(onDataCameraSuccess,onCameraFail, {quality: 50,allowEdit: true,
@@ -34,31 +30,40 @@
           navigator.camera.getPicture(onFileCameraSuccess, onCameraFail, { quality: 50,
     destinationType: Camera.DestinationType.FILE_URI });
         });
-      //Used for Opening the Gallery(still not working)
-      /*$("#tkpicgallery").tap(function(){
-        navigator.camera.getPicture(onFileCameraSuccess, onCameraFail, { quality: 50,
-        destinationType: destinationType.FILE_URI,
-        sourceType: Camera.PictureSourceType.PHOTOLIBRARY});
-      */
+      //Used for Opening the Gallery
+      $("#tkpicgallery").tap(function(){
+      	
+        navigator.camera.getPicture(onFileCameraSuccess, onCameraFail,
+     {sourceType: Camera.PictureSourceType.PHOTOLIBRARY});
+      });
+
+      					/**DEVICE PLUGIN**/
     //Used for Checking Device Informations
       $("#deviceinfobtn").tap(deviceCheck);
-
+      					/**INTERNET-INFORMATION PLUGIN**/
       //Used for Checking Internet Informations
       $("#connectchkbtn").tap(checkConnection);
-
+      					/**DEVICE MOTION PLUGIN**/
       //Used for Accelerometer
       $("#accel").tap(function(){
         navigator.accelerometer.getCurrentAcceleration(accelerometerSuccess, accelerometerError);
       });
-      
+
+      //Used for Watching Acceleration(Not Working)
+      /*
+      $("#startwatch").tap(function(){
+      	navigator.accelerometer.watchAcceleration(watchAccelerometer,accelerometerError,{frequency: 3000});
+      });
+      */
       //Used for Vibrating device with time
+/*
       $("#simplevib").tap(function(){
         navigator.vibrate(3000);
       });
       $("#patternedvib").tap(function(){
         navigator.vibrate([1000, 1000, 3000, 2000, 8000]);
       });
-      
+    */  
       });         
         	},false);
         
@@ -273,7 +278,7 @@
         	</header>
         	<article data-role="content">
         		<center>
-        			<input type="button" id="connectchkbtn" value="Check Your Network Information" />
+        			<input type="button" id="connectchkbtn" value="Check Your Network Info" />
         			<!--<input type="button" id="tkpicfileurlbtn" value="File URL" />-->
         			
         		</center>
@@ -290,15 +295,38 @@
 
         <section data-role="page" id="accelerometer" data-close-btn="none" data-dialog="true">
         	<header data-role="header" data-theme="b" >
-        	<h1>Battery Plugin</h1>
+        	<h1>Device-Motion Plugin</h1>
         	</header>
         	<article data-role="content">
         		<center>
         			<!--<input type="button" id="btper" value="Battery Percentage" /> -->
         			<input type="button" id="accel" value="Current Acceleration" />
+        			<!--<input type="button" id="startwatch" value="Watch Acceleration" />
+        			<p id="accelreading"></p> -->
         		</center>
         	</article>
         	<footer data-role="footer" data-position="fixed" data-theme="b">
+                <div data-role="navbar" id="navigation">
+                    <ul>
+                        <li><a href="#landingpage" data-icon="home" data-iconpos="top" id="homenav">Home</a></li>
+                        <li><a href="#" data-icon="info" data-iconpos="top">Info</a></li>
+                    </ul>
+                </div>
+            </footer>
+        </section>
+        <section data-role="page" id="dialogs" data-close-btn="none" data-dialog="true">
+          <header data-role="header" data-theme="b" >
+          <h1>Dialogs Plugin</h1>
+          </header>
+          <article data-role="content">
+            <center>              
+              <input type="button" id="alertbtn" value="Alert" />
+              <input type="button" id="confirmbtn" value="Confirm" /> 
+              <input type="button" id="Prompt" value="Prompt" />
+              <input type="button" id="beep" value="Beep">
+            </center>
+          </article>
+          <footer data-role="footer" data-position="fixed" data-theme="b">
                 <div data-role="navbar" id="navigation">
                     <ul>
                         <li><a href="#landingpage" data-icon="home" data-iconpos="top" id="homenav">Home</a></li>
