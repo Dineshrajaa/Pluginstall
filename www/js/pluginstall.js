@@ -7,7 +7,7 @@ function toastAlert(msg){
 			/**BATTERY PLUGIN**/
 function onBatteryStatus(info) {
     
-    if (info.isPlugged=="true") toastAlert(" Phone is Charging and you have "+ info.level +" % charge");
+    if (info.isPlugged==true) toastAlert(" Phone is Charging and you have "+ info.level +" % charge");
     else toastAlert(" Phone is on Battery and you have "+ info.level +" % charge");    
 }
 
@@ -86,6 +86,47 @@ function onFileCameraSuccess(imageURI){
 function onCameraFail(message){
 	toastAlert(message);
 }
+
+			/**DIALOGS PLUGIN**/
+
+					/*Alert Box Methods*/
+//Used to Open an Alertbox
+function dialogAlerter(){
+navigator.notification.alert("This is an Alert box created using Notification Plugin",alertExit,"Alert Dialog","Understood");
+}
+
+//Called when alertbox closed
+function alertExit(){
+	toastAlert("You have closed an Alert box");
+}
+					/*Confirm Box Methods*/
+//Used to Open Confirmbox
+function confirmAlerter(){
+	navigator.notification.confirm("This is an Confirmbox",confirmExit,"Confirm Dialog",['Ok','Cancel']);
+}
+
+//Called when Confirmbox closed
+function confirmExit(buttonIndex){
+	if (buttonIndex==1) toastAlert("You have Clicked Ok Button");
+	else toastAlert("You have Clicked Cancel Button")
+}
+					/*Prompt Box Methods*/
+//Used to Open Promptbox
+function promptAlerter(){
+	navigator.notification.prompt("Enter Your Name",promptExit,"Prompt Dialog",['Save','Cancel']);
+}
+
+//Called when Promptbox Closed
+function promptExit(results){
+	if (results.buttonIndex==1&&results.input1!="")toastAlert("Welcome "+results.input1);
+	else toastAlert("Sorry to let you go"); 
+}
+					/*Beep Methods*/
+//Used to Produce Beep Button
+function beepAlerter(){
+	navigator.notification.beep(2);
+}
+
 //Used to inform the viewer about the currently working Plugins
 /*function featuresAvailable(){
 alert("This is the list of working Plugins:

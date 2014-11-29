@@ -38,11 +38,13 @@
       });
 
       					/**DEVICE PLUGIN**/
-    //Used for Checking Device Informations
+       //Used for Checking Device Informations
       $("#deviceinfobtn").tap(deviceCheck);
       					/**INTERNET-INFORMATION PLUGIN**/
       //Used for Checking Internet Informations
       $("#connectchkbtn").tap(checkConnection);
+
+
       					/**DEVICE MOTION PLUGIN**/
       //Used for Accelerometer
       $("#accel").tap(function(){
@@ -55,6 +57,19 @@
       	navigator.accelerometer.watchAcceleration(watchAccelerometer,accelerometerError,{frequency: 3000});
       });
       */
+
+      					/**DIALOGS PLUGIN**/
+    //Used for Opening the Alert box
+    $("#alertbtn").tap(dialogAlerter);
+
+    //Used for Opening the Confirm box
+    $("#confirmbtn").tap(confirmAlerter);
+
+    //Used for Opening the Prompt box
+    $("#promptbtn").tap(promptAlerter);
+
+    //Used for Producing Beep Alert
+    $("#beepbtn").tap(beepAlerter);
       //Used for Vibrating device with time
 /*
       $("#simplevib").tap(function(){
@@ -322,8 +337,8 @@
             <center>              
               <input type="button" id="alertbtn" value="Alert" />
               <input type="button" id="confirmbtn" value="Confirm" /> 
-              <input type="button" id="Prompt" value="Prompt" />
-              <input type="button" id="beep" value="Beep">
+              <input type="button" id="promptbtn" value="Prompt" />
+              <input type="button" id="beepbtn" value="Beep">
             </center>
           </article>
           <footer data-role="footer" data-position="fixed" data-theme="b">
