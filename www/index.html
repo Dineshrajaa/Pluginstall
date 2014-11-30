@@ -95,7 +95,7 @@ navigator.camera.getPicture(onFileCameraSuccess, onCameraFail,
     $("#locationwatch").tap(function(){
     	var geowatch=navigator.geolocation.watchPosition(onGeolocationSuccess,geolocationError);
     });
-    //Used for Clearing the Collected Info and remove the GeoWatch(Not Clearing the GEO Information)
+//Used for Clearing the Collected Info and remove the GeoWatch(Not Clearing the GEO Information)
     /*
     $("#cleargeo").tap(function(){
     	//toastAlert("I am working");
@@ -104,6 +104,14 @@ navigator.camera.getPicture(onFileCameraSuccess, onCameraFail,
     	document.getElementById("georeading").innerHTML=" ";
     });
      */
+
+
+    					/**INAPPBROWSER PLUGIN**/
+   	//Used for Opening an Inappbrowser
+   	$("#inappbtn").tap(function(){
+   		var extPage=window.open('https://www.facebook.com/dineshraja.Labinix', '_blank', 'location=yes');
+   	});
+    
       //Used for Vibrating device with time
 /*
       $("#simplevib").tap(function(){
@@ -271,7 +279,7 @@ navigator.camera.getPicture(onFileCameraSuccess, onCameraFail,
         		<center>
         			<input type="button" id="tkpicbasebtn" value="Data URL" />
         			<input type="button" id="tkpicfileurlbtn" value="File URL" />
-              		<input type="button" id="tkpicgallery" value="Open Gallery" />
+              		<!--<input type="button" id="tkpicgallery" value="Open Gallery" /> -->
               		<input type="button" id="tkpiclibrary" value="Open PhotoLibrary" />
         			<img src="" id="picbox">
         		</center>
@@ -306,7 +314,7 @@ navigator.camera.getPicture(onFileCameraSuccess, onCameraFail,
                 </div>
             </footer>
         </section>
-<section data-role="page" id="device" data-close-btn="none" data-dialog="true">
+		<section data-role="page" id="device" data-close-btn="none" data-dialog="true">
           <header data-role="header" data-theme="b">
             <h1>Device Plugin</h1>
           </header>
@@ -347,7 +355,24 @@ navigator.camera.getPicture(onFileCameraSuccess, onCameraFail,
                 </div>
             </footer>
         </section>
-
+<section data-role="page" id="inappbrowser" data-close-btn="none" data-dialog="true">
+        	<header data-role="header" data-theme="b">
+        		<h1>InAppBrowser Plugin</h1>
+        	</header>
+        	<article data-role="content">
+        		<center>
+        			<input type="button" id="inappbtn" value="Add Me" />       			       	
+        		</center>
+        	</article>
+        	<footer data-role="footer" data-position="fixed" data-theme="b">
+                <div data-role="navbar" id="navigation">
+                    <ul>
+                        <li><a href="#landingpage" data-icon="home" data-iconpos="top" id="homenav">Home</a></li>
+                        <li><a href="#" data-icon="info" data-iconpos="top">Info</a></li>
+                    </ul>
+                </div>
+            </footer>
+        </section>
         <section data-role="page" id="network" data-close-btn="none" data-dialog="true">
         	<header data-role="header" data-theme="b">
         		<h1>Network Plugin</h1>

@@ -8,8 +8,6 @@
         Dinesh Raja
     </author>
     <content src="index.html" />
-    <access origin="*" />
-
-    
+    <access origin="*" />      
     
 </widget>
