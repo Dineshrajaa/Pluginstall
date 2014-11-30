@@ -34,8 +34,16 @@
       $("#tkpicgallery").tap(function(){
       	
         navigator.camera.getPicture(onFileCameraSuccess, onCameraFail,
+     {sourceType: Camera.PictureSourceType.SAVEDPHOTOALBUM});
+      });
+
+      $("#tkpiclibrary").tap(function(){
+navigator.camera.getPicture(onFileCameraSuccess, onCameraFail,
      {sourceType: Camera.PictureSourceType.PHOTOLIBRARY});
       });
+
+      					/**CONTACT PLUGIN**/
+      	//Used to Create New Contact 
 
       					/**DEVICE PLUGIN**/
        //Used for Checking Device Informations
@@ -46,15 +54,21 @@
 
 
       					/**DEVICE MOTION PLUGIN**/
-      //Used for Accelerometer
+      //Used for Accelerometer Current Device Position
       $("#accel").tap(function(){
         navigator.accelerometer.getCurrentAcceleration(accelerometerSuccess, accelerometerError);
       });
+      //Used for Accelerometer Device Movement tracking
+      $("#accelwatch").tap(function(){
+      	var accelId=navigator.accelerometer.watchAcceleration(onWatchAccelSuccess,accelerometerError,{frequency:1000});
+      });
 
-      //Used for Watching Acceleration(Not Working)
+      //Used for Clearing the Acceleration Reading(Not Clearing the Acceleration Reading)
       /*
-      $("#startwatch").tap(function(){
-      	navigator.accelerometer.watchAcceleration(watchAccelerometer,accelerometerError,{frequency: 3000});
+      $("#clearwatch").tap(function(){
+      	toastAlert("I am called");
+      	navigator.accelerometer.clearWatch(accelId);
+      	document.getElementById("accelreading").innerHTML=" ";
       });
       */
 
@@ -70,6 +84,26 @@
 
     //Used for Producing Beep Alert
     $("#beepbtn").tap(beepAlerter);
+
+    					/**GEOLOCATION PLUGIN**/
+    //Used for Getting the GPS info of the device
+    $("#curlocation").tap(function(){
+    	//toastAlert("I am tapped");
+    	navigator.geolocation.getCurrentPosition(geolocationSuccess,geolocationError);
+    });
+    //Used to Print GPS info in a paragraph
+    $("#locationwatch").tap(function(){
+    	var geowatch=navigator.geolocation.watchPosition(onGeolocationSuccess,geolocationError);
+    });
+    //Used for Clearing the Collected Info and remove the GeoWatch(Not Clearing the GEO Information)
+    /*
+    $("#cleargeo").tap(function(){
+    	//toastAlert("I am working");
+    	navigator.geolocation.clearWatch(geowatch);
+    	
+    	document.getElementById("georeading").innerHTML=" ";
+    });
+     */
       //Used for Vibrating device with time
 /*
       $("#simplevib").tap(function(){
@@ -133,12 +167,12 @@
                        <h6>Visual device notifications.</h6> 
                        </a>
                     </li>
-
+					<!--
                     <li>
                        <a href="#filesystem" data-transition="flip">Filesystem
                        <h6>Hook into native file system through JavaScript.</h6> 
                        </a>
-                    </li>
+                    </li> 
 
                     <li>
                        <a href="#filetransfer" data-transition="flip">File Transfer
@@ -146,17 +180,20 @@
                        </a>
                     </li>
 
+					<li>
+                       <a href="#globalization" data-transition="flip">Globalization
+                       <h6>Enable representation of objects specific to a locale.</h6> 
+                       </a>
+                    </li>
+                     -->
+
                     <li>
                        <a href="#geolocation" data-transition="flip">Geolocation
                        <h6>Make your application location aware.</h6> 
                        </a>
                     </li>
 
-                    <li>
-                       <a href="#globalization" data-transition="flip">Globalization
-                       <h6>Enable representation of objects specific to a locale.</h6> 
-                       </a>
-                    </li>
+                    
 
                     <li>
                        <a href="#inappbrowser" data-transition="flip">InAppBrowser
@@ -234,7 +271,8 @@
         		<center>
         			<input type="button" id="tkpicbasebtn" value="Data URL" />
         			<input type="button" id="tkpicfileurlbtn" value="File URL" />
-              <input type="button" id="tkpicgallery" value="Open Gallery" />
+              		<input type="button" id="tkpicgallery" value="Open Gallery" />
+              		<input type="button" id="tkpiclibrary" value="Open PhotoLibrary" />
         			<img src="" id="picbox">
         		</center>
         	</article>
@@ -256,8 +294,7 @@
             <center>
               <input type="button" id="createcontactbtn" value="Create Contact" />
               <input type="button" id="findcontactbtn" value="Find Contact" />
-              <input type="button" id="selectcontactbtn" value="Select Contacts" />
-              <img src="" id="picbox">
+              <input type="button" id="selectcontactbtn" value="Select Contacts" />              
             </center>
           </article>
           <footer data-role="footer" data-position="fixed" data-theme="b">
@@ -287,6 +324,30 @@
                 </div>
             </footer>
         </section>
+
+        <section data-role="page" id="geolocation" data-close-btn="none" data-dialog="true">
+        	<header data-role="header" data-theme="b" >
+        	<h1>Geolocation Plugin</h1>
+        	</header>
+        	<article data-role="content">
+        		<center>
+        			
+        			<input type="button" id="curlocation" value="Current Position" />
+        			<input type="button" id="locationwatch" value="Watch Position" />
+        			<!--<input type="button" id="cleargeo" value="Clear Position" /> -->
+        			<p id="georeading"></p> 
+        		</center>
+        	</article>
+        	<footer data-role="footer" data-position="fixed" data-theme="b">
+                <div data-role="navbar" id="navigation">
+                    <ul>
+                        <li><a href="#landingpage" data-icon="home" data-iconpos="top" id="homenav">Home</a></li>
+                        <li><a href="#" data-icon="info" data-iconpos="top">Info</a></li>
+                    </ul>
+                </div>
+            </footer>
+        </section>
+
         <section data-role="page" id="network" data-close-btn="none" data-dialog="true">
         	<header data-role="header" data-theme="b">
         		<h1>Network Plugin</h1>
@@ -313,11 +374,11 @@
         	<h1>Device-Motion Plugin</h1>
         	</header>
         	<article data-role="content">
-        		<center>
-        			<!--<input type="button" id="btper" value="Battery Percentage" /> -->
+        		<center>        			
         			<input type="button" id="accel" value="Current Acceleration" />
-        			<!--<input type="button" id="startwatch" value="Watch Acceleration" />
-        			<p id="accelreading"></p> -->
+        			<input type="button" id="accelwatch" value="Watch Acceleration" />
+        			<!--<input type="button" id="clearwatch" value="Clear Acceleration" /> -->
+        			<p id="accelreading"></p>
         		</center>
         	</article>
         	<footer data-role="footer" data-position="fixed" data-theme="b">

@@ -11,6 +11,12 @@ function onBatteryStatus(info) {
     else toastAlert(" Phone is on Battery and you have "+ info.level +" % charge");    
 }
 
+			/**CONTACTS PLUGIN**/
+function createContact(){
+	var newContact=navigator.contacts.create({"displayName":"Dinesh Raja"});
+
+}
+
 			/**DEVICE PLUGIN**/
 function deviceCheck(){
     var cordova_version=device.cordova;
@@ -27,6 +33,34 @@ function deviceCheck(){
         "OS version:"+ version
         );
 }
+
+			/**GEOLOCATION PLUGIN**/
+	//Called to get Geolocation Info
+	var geolocationSuccess=function(position){
+		//toastAlert("I got a call");
+alert(    'Latitude: '          + position.coords.latitude          + '\n' +
+          'Longitude: '         + position.coords.longitude         + '\n' +
+          'Altitude: '          + position.coords.altitude          + '\n' +
+          'Accuracy: '          + position.coords.accuracy          + '\n' +
+          'Altitude Accuracy: ' + position.coords.altitudeAccuracy  + '\n' +
+          'Heading: '           + position.coords.heading           + '\n' +
+          'Speed: '             + position.coords.speed             + '\n' +
+          'Timestamp: '         + position.timestamp                + '\n');
+	}
+
+	//Called on Geolocation Error
+	function geolocationError(error){
+		alert('code: '    + error.code    + '\n' +
+          'message: ' + error.message + '\n');
+	}
+
+	//Called to Print Geolocation Value in a Paragraph
+	function onGeolocationSuccess(position){
+		var geopara=document.getElementById('georeading');
+		geopara.innerHTML='Latitude: '  + position.coords.latitude      + '\n' +
+                        'Longitude: ' + position.coords.longitude     + '\n' +
+                        '<hr />'      + geopara.innerHTML;
+	}
 
 			/**INTERNET-INFORMATION PLUGIN**/
 function checkConnection() {
@@ -55,8 +89,9 @@ function accelerometerSuccess(acceleration) {
           'Timestamp: '      + acceleration.timestamp + '\n');
 }
 //Not Working
-function watchAccelerometer(acceleration){
-var acceleratoReading=document.getElementById(accelreading);
+function onWatchAccelSuccess(acceleration){
+	//toastAlert("I am working");
+var acceleratoReading=document.getElementById("accelreading");
       acceleratoReading.innerHTML= 'Acceleration X: ' + acceleration.x + '\n' +
           'Acceleration Y: ' + acceleration.y + '\n' +
           'Acceleration Z: ' + acceleration.z + '\n' +
