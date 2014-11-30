@@ -111,6 +111,15 @@ navigator.camera.getPicture(onFileCameraSuccess, onCameraFail,
    	$("#inappbtn").tap(function(){
    		var extPage=window.open('https://www.facebook.com/dineshraja.Labinix', '_blank', 'location=yes');
    	});
+
+   						/**SPLASHSCREEN PLUGIN**/
+   	//Used to Show the Splash Screen
+   	$("#showsplash").tap(function(){
+   		navigator.splashscreen.show();
+   		setTimeout(function() {
+        navigator.splashscreen.hide();
+    }, 2000);
+   	});				
     
       //Used for Vibrating device with time
 /*
@@ -447,6 +456,25 @@ navigator.camera.getPicture(onFileCameraSuccess, onCameraFail,
             </center>
           </article>
           <footer data-role="footer" data-position="fixed" data-theme="b">
+                <div data-role="navbar" id="navigation">
+                    <ul>
+                        <li><a href="#landingpage" data-icon="home" data-iconpos="top" id="homenav">Home</a></li>
+                        <li><a href="#" data-icon="info" data-iconpos="top">Info</a></li>
+                    </ul>
+                </div>
+            </footer>
+        </section>
+        <section data-role="page" id="splashscreen" data-close-btn="none" data-dialog="true">
+        	<header data-role="header" data-theme="b" >
+        	<h1>Splash Screen Plugin</h1>
+        	</header>
+        	<article data-role="content">
+        		<center>
+        			<!--<input type="button" id="btper" value="Battery Percentage" /> -->
+        			<input type="button" id="showsplash" value="Show Splash" />
+        		</center>
+        	</article>
+        	<footer data-role="footer" data-position="fixed" data-theme="b">
                 <div data-role="navbar" id="navigation">
                     <ul>
                         <li><a href="#landingpage" data-icon="home" data-iconpos="top" id="homenav">Home</a></li>
